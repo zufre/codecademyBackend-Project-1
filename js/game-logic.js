@@ -59,6 +59,14 @@ const setPlayerMoves = (
 const getRoundWinner = roundNumber => {
   switch (roundNumber) {
     case 1:
+      if (
+        !playerOneMoveOneType ||
+        !playerOneMoveOneValue ||
+        !playerTwoMoveOneType ||
+        !playerTwoMoveOneValue
+      ) {
+        return null;
+      }
       if (playerOneMoveOneType == playerTwoMoveOneType) {
         if (playerOneMoveOneValue > playerTwoMoveOneValue) {
           return "Player One";
@@ -93,6 +101,14 @@ const getRoundWinner = roundNumber => {
         }
       }
     case 2:
+      if (
+        !playerOneMoveTwoType ||
+        !playerOneMoveTwoValue ||
+        !playerTwoMoveTwoType ||
+        !playerTwoMoveTwoValue
+      ) {
+        return null;
+      }
       if (playerOneMoveTwoType == playerTwoMoveTwoType) {
         if (playerOneMoveTwoValue > playerTwoMoveTwoValue) {
           return "Player One";
@@ -127,6 +143,14 @@ const getRoundWinner = roundNumber => {
         }
       }
     case 3:
+      if (
+        !playerOneMoveThreeType ||
+        !playerOneMoveThreeValue ||
+        !playerTwoMoveThreeType ||
+        !playerTwoMoveThreeValue
+      ) {
+        return null;
+      }
       if (playerOneMoveThreeType == playerTwoMoveThreeType) {
         if (playerOneMoveThreeValue > playerTwoMoveThreeValue) {
           return "Player One";
@@ -166,6 +190,22 @@ const getRoundWinner = roundNumber => {
   // }
 };
 const getGameWinner = () => {
+  if (
+    !playerOneMoveOneType ||
+    !playerOneMoveOneValue ||
+    !playerTwoMoveOneType ||
+    !playerTwoMoveOneValue ||
+    !playerOneMoveTwoType ||
+    !playerOneMoveTwoValue ||
+    !playerTwoMoveTwoType ||
+    !playerTwoMoveTwoValue ||
+    !playerOneMoveThreeType ||
+    !playerOneMoveThreeValue ||
+    !playerTwoMoveThreeType ||
+    !playerTwoMoveThreeValue
+  ) {
+    return null;
+  }
   let playerOneScore = 0;
   let playerTwoScore = 0;
   if (getRoundWinner(1) == "Player One") {
@@ -213,7 +253,8 @@ setComputerMoves = () => {
   } else {
     playerTwoMoveTwoType = "paper";
   }
-  playerTwoMoveTwoValue = Math.floor(Math.random() * 97) + 1;
+  playerTwoMoveTwoValue =
+    Math.floor(Math.random() * (97 - playerTwoMoveOneValue)) + 1;
   if (moveThree == 1) {
     playerTwoMoveThreeType = "scissors";
   } else if (moveThree == 2) {
